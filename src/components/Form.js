@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import TaskList from "../tasks/TaskList";
+import NoTaskImage from "./NoTaskImage";
 
 function Form() {
     const [input, setInput] = useState("");
@@ -14,16 +15,17 @@ function Form() {
             text: input,
             id: Date.now(),
         };
-        
+
         if (input.length) {
-        setTasks([...tasks, newTask])};
-        setInput('');
+            setTasks([...tasks, newTask]);
+        }
+        setInput("");
     };
 
     //logging the array for reference
     useEffect(() => {
         if (tasks.length) {
-            console.log('changing');
+            console.log("changing");
             console.log(tasks);
         }
     }, [tasks]);
@@ -65,6 +67,8 @@ function Form() {
                 </form>
             </div>
             <div>
+                {tasks.length === 0 && <NoTaskImage />}
+
                 {tasks.length > 0 && (
                     <TaskList
                         list={tasks}
