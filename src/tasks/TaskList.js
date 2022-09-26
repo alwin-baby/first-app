@@ -11,13 +11,12 @@ function TaskList({ list, deleteCompletedTask }) {
             {/* Listing out Tasks */}
             <div>
                 {list.length > 0 &&
-                    list.map((obj, index) => {
+                    list.map((obj) => {
                         return (
                             <TaskItem
-                                key={index}
+                                key={obj.id}
                                 deleteCompletedTask={deleteCompletedTask}
                                 item={obj.text}
-                                id={obj.id}
                                 obj={obj}
                             />
                         );

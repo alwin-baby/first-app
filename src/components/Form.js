@@ -1,14 +1,25 @@
 import TaskList from "../tasks/TaskList";
 import NoTaskImage from "./NoTaskImage";
 import Toast from "./Toast";
+import DataContext from "../store/Data-Context";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
+function Form(props) {
 
-function Form() {
+    const data = useContext(DataContext);
+
     const [input, setInput] = useState("");
     const [tasks, setTasks] = useState([]);
     const [toastStatus, setToastStatus] = useState(false);
+
+    //.......moved.......
+    //.......moved.......
+    //.......moved.......
+    //.......moved.......
+    //.......moved.......
+    //.......moved.......
+    //.......moved.......
 
     //obtaining the value from the input field
     const handleInput = (e) => setInput(e.target.value);
@@ -23,16 +34,8 @@ function Form() {
         if (input.length) {
             setTasks([...tasks, newTask]);
         }
+
         setInput("");
-    };
-
-    //Displaying Toast
-    const handleSetToastStatus = () => {
-        setToastStatus(true);
-
-        setTimeout(() => {
-            setToastStatus(false);
-        }, 800);
     };
 
     //logging the array for reference
@@ -43,12 +46,29 @@ function Form() {
         }
     }, [tasks]);
 
+    //Displaying Toast
+    const handleSetToastStatus = () => {
+        setToastStatus(true);
+
+        setTimeout(() => {
+            setToastStatus(false);
+        }, 800);
+    };
+
     //deleting completed tasks on clicking
     const deleteCompletedTask = (clickedObj) => {
         const updatedArray = tasks.filter((obj) => obj.id !== clickedObj.id);
         setTasks(updatedArray);
         handleSetToastStatus();
     };
+
+    //.......moved.......
+    //.......moved.......
+    //.......moved.......
+    //.......moved.......
+    //.......moved.......
+    //.......moved.......
+    //.......moved.......
 
     //listening for enter-key press and calling the handleSetTasks function
     useEffect(() => {
@@ -90,7 +110,7 @@ function Form() {
                     />
                 )}
 
-                {toastStatus===true && <Toast/>}
+                {toastStatus === true && <Toast />}
             </div>
         </div>
     );
