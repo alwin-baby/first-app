@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
 import TaskList from "../tasks/TaskList";
 import NoTaskImage from "./NoTaskImage";
+import Toast from "./Toast";
+
+import { useState, useEffect } from "react";
+
 
 function Form() {
     const [input, setInput] = useState("");
     const [tasks, setTasks] = useState([]);
+    const [toastStatus, setToastStatus] = useState(false);
 
     //obtaining the value from the input field
     const handleInput = (e) => setInput(e.target.value);
@@ -22,6 +26,15 @@ function Form() {
         setInput("");
     };
 
+    //Displaying Toast
+    const handleSetToastStatus = () => {
+        setToastStatus(true);
+
+        setTimeout(() => {
+            setToastStatus(false);
+        }, 800);
+    };
+
     //logging the array for reference
     useEffect(() => {
         if (tasks.length) {
@@ -34,6 +47,7 @@ function Form() {
     const deleteCompletedTask = (clickedObj) => {
         const updatedArray = tasks.filter((obj) => obj.id !== clickedObj.id);
         setTasks(updatedArray);
+        handleSetToastStatus();
     };
 
     //listening for enter-key press and calling the handleSetTasks function
@@ -75,6 +89,8 @@ function Form() {
                         deleteCompletedTask={deleteCompletedTask}
                     />
                 )}
+
+                {toastStatus===true && <Toast/>}
             </div>
         </div>
     );
