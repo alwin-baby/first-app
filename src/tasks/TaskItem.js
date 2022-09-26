@@ -1,8 +1,14 @@
-function TaskItem({ deleteCompletedTask, obj, item }) {
+import DataContext from "../store/Data-Context";
+
+import { useContext } from "react";
+
+function TaskItem({ obj, item }) {
+    const data = useContext(DataContext);
+
     return (
         //Showing Tasks and Deleting Completed Tasks
         <div>
-            <p onClick={() => deleteCompletedTask(obj)}>{item}</p>
+            <p onClick={() => data.deleteCompletedTask(obj)}>{item}</p>
         </div>
     );
 }

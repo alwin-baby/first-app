@@ -1,11 +1,12 @@
-import { createContext, useState, useEffect} from "react";
+import { createContext, useState, useEffect } from "react";
 
 const DataContext = createContext({
+    input: "",
     tasks: [],
     handleInput: (e) => {},
     handleSetTasks: () => {},
     deleteCompletedTask: (clickedObj) => {},
-    toastStatus: false
+    toastStatus: false,
 });
 
 export function DataContextProvider(props) {
@@ -50,10 +51,11 @@ export function DataContextProvider(props) {
 
         setTimeout(() => {
             setToastStatus(false);
-        }, 800);
+        }, 5000);
     };
 
     const context = {
+        input: input,
         tasks: tasks,
         handleInput: handleInput,
         handleSetTasks: handleSetTasks,
