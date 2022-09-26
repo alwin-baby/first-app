@@ -1,13 +1,15 @@
-import DataContext from "../store/Data-Context";
+import DataContext from "../store/DataContext";
 
 import { useContext } from "react";
 
+//gets task object as obj and task name as item from TaskList
 function TaskItem({ obj, item }) {
-    const data = useContext(DataContext);
+    const data = useContext(DataContext); //using context
 
     return (
-        //Showing Tasks and Deleting Completed Tasks
+        //displaying Tasks
         <div>
+            {/* calls the function inside the context to delete the task */}
             <p onClick={() => data.deleteCompletedTask(obj)}>{item}</p>
         </div>
     );

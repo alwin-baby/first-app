@@ -1,9 +1,9 @@
-import DataContext from "../store/Data-Context";
+import DataContext from "../store/DataContext";
 
 import { useEffect, useContext } from "react";
 
 function Form() {
-    const data = useContext(DataContext);
+    const data = useContext(DataContext); //using context
 
     //listening for enter-key press and calling the handleSetTasks function
     useEffect(() => {
@@ -27,8 +27,8 @@ function Form() {
                     <input
                         type="text"
                         placeholder="Add new task"
-                        value={data.input}
-                        onChange={data.handleInput}
+                        value={data.input} //saves entered data in the input object of context
+                        onChange={data.handleInput} //calls input handling function from context
                         required
                     />
                 </div>

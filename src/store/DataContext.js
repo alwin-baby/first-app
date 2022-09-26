@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 
+//creates the context and initial values are set
 const DataContext = createContext({
     input: "",
     tasks: [],
@@ -9,25 +10,25 @@ const DataContext = createContext({
     toastStatus: false,
 });
 
+// creates context provider
 export function DataContextProvider(props) {
     const [input, setInput] = useState("");
     const [tasks, setTasks] = useState([]);
     const [toastStatus, setToastStatus] = useState(false);
 
-    //obtaining the value from the input field
-    const handleInput = (e) => setInput(e.target.value);
+    const handleInput = (e) => setInput(e.target.value); //obtaining the value from the input field
 
     //adding the values to the tasks array
     const handleSetTasks = () => {
         const newTask = {
             text: input,
-            id: Date.now(),
+            id: Date.now(), //current date and time in milliseconds
         };
         if (input.length) {
             setTasks([...tasks, newTask]);
         }
 
-        setInput("");
+        setInput(""); //makes the input field empty
     };
 
     //logging the array for reference
@@ -42,18 +43,19 @@ export function DataContextProvider(props) {
     const deleteCompletedTask = (clickedObj) => {
         const updatedArray = tasks.filter((obj) => obj.id !== clickedObj.id);
         setTasks(updatedArray);
-        handleSetToastStatus();
+        handleSetToastStatus(); //calls the function which initiates the display of toast
     };
 
-    //Displaying Toast
+    //initiates the display of toast
     const handleSetToastStatus = () => {
         setToastStatus(true);
 
         setTimeout(() => {
             setToastStatus(false);
-        }, 5000);
+        }, 5000); // toast undisplayed after 5 seconds
     };
 
+    //context object to pass and update data in the context, dynamically
     const context = {
         input: input,
         tasks: tasks,

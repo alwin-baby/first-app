@@ -4,26 +4,22 @@ import SmartPhoneIcon from "./SmartPhoneIcon";
 import { useState, useEffect } from "react";
 
 function DeviceLogo() {
-    const getWidth = () => window.innerWidth;
+    const getWidth = () => window.innerWidth; //obtains the current width of the screen
 
     function useCurrentWidth() {
-        // save current window width in the state object
-        let [width, setWidth] = useState(getWidth());
+        //This function returns the width of the screen whenever there is screen resize
 
-        // in this case useEffect will execute only once because
-        // it does not have any dependencies.
+        let [width, setWidth] = useState(getWidth()); // save current window width in the state object
+
         useEffect(() => {
             const resizeListener = () => {
-                // change width from the state object
-                setWidth(getWidth());
+                setWidth(getWidth()); // change width from the state object
             };
-            // set resize listener
-            window.addEventListener("resize", resizeListener);
 
-            // clean up function
+            window.addEventListener("resize", resizeListener); // set resize listener
+
             return () => {
-                // remove resize listener
-                window.removeEventListener("resize", resizeListener);
+                window.removeEventListener("resize", resizeListener); // clean up function
             };
         }, []);
 
@@ -34,8 +30,10 @@ function DeviceLogo() {
 
     return (
         <div>
-            {width > 768 && <DesktopIcon />}
-            {width <= 768 && <SmartPhoneIcon />}
+            {/* displays desktop icon when screen width is above 768px */}
+            {width > 768 && <DesktopIcon />}{" "}
+            {/* displays smartphone icon when screen width is below 768px */}
+            {width <= 768 && <SmartPhoneIcon />}{" "}
         </div>
     );
 }
