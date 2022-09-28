@@ -1,18 +1,22 @@
 import DataContext from "../store/DataContext";
 
-import classes from "./Form.module.css"
+import classes from "./Form.module.css";
 
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 
 function Form() {
+    const [input, setInput] = useState("");
     const data = useContext(DataContext); //using context
+
+    const handleInput = (event) => setInput(event.target.value); //obtaining the value from the input field
 
     //listening for enter-key press and calling the handleSetTasks function
     useEffect(() => {
         const listener = (event) => {
             if (event.code === "Enter" || event.code === "NumpadEnter") {
                 event.preventDefault();
-                data.handleSetTasks();
+                if (input.length) data.handleSetTasks(input);
+                setInput(""); //makes the input field empty
             }
         };
         document.addEventListener("keydown", listener);
@@ -26,11 +30,12 @@ function Form() {
         <div>
             <form>
                 <div className={classes.inputContainer}>
-                    <input className={classes.inputBox}
+                    <input
+                        className={classes.inputBox}
                         type="text"
                         placeholder="Add new task"
-                        value={data.input} //saves entered data in the input object of context
-                        onChange={data.handleInput} //calls input handling function from context
+                        value={input} //saves entered data in the input state
+                        onChange={handleInput} //calls input handling function
                         required
                     />
                 </div>
