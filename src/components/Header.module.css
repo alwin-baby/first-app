@@ -38,12 +38,6 @@
 @media (max-width: 768px) {
     .headerContainer {
         justify-content: center;
-        box-sizing: border-box;
-        background: #f4f4f4;
-        border-bottom: 1px solid #5e5b5b;
-    }
-
-    .task {
-        margin-left: 0;
     }
 }
+
