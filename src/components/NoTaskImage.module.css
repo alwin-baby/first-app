@@ -1,0 +1,33 @@
+.imageContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    margin-top: 87px;
+}
+
+.textContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.text {
+    margin-top: 37px;
+    font-size: 33px;
+    font-weight: 400;
+    line-height: 39px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #606060;
+}
+
+@media (max-width: 768px) {
+    .image {
+        margin-top: 223px;
+    }
+
+    .text {
+        margin-top: 26px;
+    }
+}

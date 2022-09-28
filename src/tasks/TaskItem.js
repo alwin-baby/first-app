@@ -1,5 +1,7 @@
 import DataContext from "../store/DataContext";
 
+import classes from "./TaskItem.module.css"
+
 import { useContext } from "react";
 
 //gets task object as obj and task name as item from TaskList
@@ -8,9 +10,9 @@ function TaskItem({ obj, item }) {
 
     return (
         //displaying Tasks
-        <div>
+        <div className={classes.taskTextContainer} onClick={() => data.deleteCompletedTask(obj)}>
             {/* calls the function inside the context to delete the task */}
-            <p onClick={() => data.deleteCompletedTask(obj)}>{item}</p>
+            <p className={classes.taskText} >{item}</p>
         </div>
     );
 }

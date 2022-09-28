@@ -1,21 +1,23 @@
 import TaskItem from "./TaskItem";
 import DataContext from "../store/DataContext";
 
+import classes from "./TaskList.module.css"
+
 import { useContext } from "react";
 
 function TaskList() {
     const data = useContext(DataContext); //using context
 
     return (
-        <div>
+        <div className={classes.divContainer}>
             {/* Task count */}
-            <div>
+            <div className={classes.taskCountContainer}>
                 {/* &#40; = '(' and &#41 =')' */}
-                <p>My Tasks &#40;{data.tasks.length}&#41;</p>
+                <p className={classes.taskCount}>My Tasks &#40;{data.tasks.length}&#41;</p>
             </div>
 
             {/* Listing out Tasks */}
-            <div>
+            <div className={classes.listContainer}>
                 {data.tasks.length > 0 &&
                     data.tasks.map((obj) => {
                         return (

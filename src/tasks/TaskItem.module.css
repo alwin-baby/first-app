@@ -1,0 +1,33 @@
+.taskTextContainer {
+    box-sizing: border-box;
+    width: 759px;
+    border-bottom: rgba(94, 91, 91, 0.3) 1px;
+    border-bottom-style: solid;
+}
+
+.taskTextContainer :hover {
+    background: rgba(217, 217, 217, 0.58);
+    border-color: rgba(94, 91, 91, 0.3);
+}
+
+.taskText {
+    font-size: 23px;
+    font-weight: 300;
+    line-height: 27px;
+    text-align: left;
+    color: #000000;
+    padding-top: 14px;
+    padding-bottom: 15px;
+    padding-left: 13px;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .taskTextContainer {
+        width: 594px;
+    }
+
+    .taskText {
+        padding-left: 10px;
+    }
+}

@@ -1,5 +1,7 @@
 import DataContext from "../store/DataContext";
 
+import classes from "./Form.module.css"
+
 import { useEffect, useContext } from "react";
 
 function Form() {
@@ -23,8 +25,8 @@ function Form() {
     return (
         <div>
             <form>
-                <div>
-                    <input
+                <div className={classes.inputContainer}>
+                    <input className={classes.inputBox}
                         type="text"
                         placeholder="Add new task"
                         value={data.input} //saves entered data in the input object of context

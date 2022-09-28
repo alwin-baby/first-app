@@ -1,0 +1,31 @@
+.inputContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.inputBox {
+    box-sizing: border-box;
+    width: 759px;
+    height: 67px;
+    border: 2px solid #6c63ff;
+    border-radius: 6px;
+    margin-top: 98px;
+    line-height: 39px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 39px;
+    color: #000000;
+    padding-left: 25px;
+}
+
+::placeholder {
+    color: #b7a8a8;
+}
+
+@media (max-width: 768px) {
+    .inputBox {
+        margin-top: 83px;
+        width: 594px;
+    }
+}

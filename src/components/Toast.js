@@ -1,7 +1,11 @@
+import classes from "./Toast.module.css";
+
 function Toast() {
     return (
-        <div>
-            <p>Task Completed</p>
+        <div className={classes.div}>
+            <div className={classes.toastContainer}>
+                <p className={classes.toast}>Task Completed</p>
+            </div>
         </div>
     );
 }

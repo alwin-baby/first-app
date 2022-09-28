@@ -1,0 +1,30 @@
+.div{
+    display: flex;
+    justify-content: center;
+}
+
+.toastContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 668px;
+    height: 81px;
+    top: 773px;
+    background: #6c63ff;
+    border-radius: 12px;
+}
+
+.toast {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 47px;
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .toastContainer {
+        width: 594px;
+    }
+}

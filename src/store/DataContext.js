@@ -25,7 +25,7 @@ export function DataContextProvider(props) {
             id: Date.now(), //current date and time in milliseconds
         };
         if (input.length) {
-            setTasks([...tasks, newTask]);
+            setTasks([newTask, ...tasks]);
         }
 
         setInput(""); //makes the input field empty
