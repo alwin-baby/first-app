@@ -30,10 +30,8 @@ function DeviceLogo() {
 
     return (
         <div>
-            {/* displays desktop icon when screen width is above 768px */}
-            {width > 768 && <DesktopIcon />}
-            {/* displays smartphone icon when screen width is below 768px */}
-            {width <= 768 && <SmartPhoneIcon />}
+            {/* displays desktop icon when screen width is above 768px, else displays smartphone icon */}
+            {width > 768 ? <DesktopIcon /> : <SmartPhoneIcon />}
         </div>
     );
 }

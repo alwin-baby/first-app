@@ -15,14 +15,11 @@ function App() {
             <Header />
             <Form />
 
-            {/* Shows Image and Text, only when there are no tasks */}
-            {data.tasks.length === 0 && <NoTaskImage />}
-
-            {/* Shows the list of tasks */}
-            {data.tasks.length > 0 && <TaskList />}
+            {/* Shows Image and Text when there are no tasks and shows the list of tasks when there are tasks */}
+            {data.tasks.length ? <TaskList /> : <NoTaskImage />}
 
             {/* displays toast when a task is marked completed */}
-            {data.toastStatus === true && <Toast />}
+            {data.toastStatus && <Toast />}
         </div>
     );
 }
