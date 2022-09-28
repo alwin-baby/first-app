@@ -22,7 +22,7 @@ function TaskList() {
                     data.tasks.map((obj) => {
                         return (
                             //passing each object and its text to TaskItem
-                            <TaskItem key={obj.id} item={obj.text} obj={obj} />
+                            <TaskItem key={obj.id} obj={obj} />
                         );
                     })}
             </div>
