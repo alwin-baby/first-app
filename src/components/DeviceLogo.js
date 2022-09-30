@@ -4,38 +4,30 @@ import SmartPhoneIcon from "./SmartPhoneIcon";
 import { useState, useEffect } from "react";
 
 function DeviceLogo() {
-    const getWidth = () => window.innerWidth;
+    const getDevice = () => {
+        if (window.innerWidth > 768) {
+            return "Desktop";
+        } else {
+            return "Smartphone";
+        }
+    }; //obtains the current device type
 
-    function useCurrentWidth() {
-        // save current window width in the state object
-        let [width, setWidth] = useState(getWidth());
+    let [device, setDevice] = useState(getDevice()); // save current device in the state object
 
-        // in this case useEffect will execute only once because
-        // it does not have any dependencies.
-        useEffect(() => {
-            const resizeListener = () => {
-                // change width from the state object
-                setWidth(getWidth());
-            };
-            // set resize listener
-            window.addEventListener("resize", resizeListener);
+    useEffect(() => {
+        const resizeListener = () => setDevice(getDevice()); // changes the device in the state object whenever there is screen resize
 
-            // clean up function
-            return () => {
-                // remove resize listener
-                window.removeEventListener("resize", resizeListener);
-            };
-        }, []);
+        window.addEventListener("resize", resizeListener); // set resize listener
 
-        return width;
-    }
-
-    let width = useCurrentWidth();
+        return () => {
+            window.removeEventListener("resize", resizeListener); // clean up function
+        };
+    }, []);
 
     return (
         <div>
-            {width > 768 && <DesktopIcon />}
-            {width <= 768 && <SmartPhoneIcon />}
+            {/* displays desktop icon when device is "Desktop", else displays smartphone icon */}
+            {device === "Desktop" ? <DesktopIcon /> : <SmartPhoneIcon />}
         </div>
     );
 }

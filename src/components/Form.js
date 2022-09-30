@@ -1,97 +1,37 @@
-import TaskList from "../tasks/TaskList";
-import NoTaskImage from "./NoTaskImage";
-import Toast from "./Toast";
+import DataContext from "../store/DataContext";
+import { ACTIONS } from "../store/DataContext";
 
-import { useState, useEffect } from "react";
+import classes from "./Form.module.css";
 
+import { useState, useContext } from "react";
 
 function Form() {
     const [input, setInput] = useState("");
-    const [tasks, setTasks] = useState([]);
-    const [toastStatus, setToastStatus] = useState(false);
+    const data = useContext(DataContext); //using context
 
-    //obtaining the value from the input field
-    const handleInput = (e) => setInput(e.target.value);
+    const handleInput = (e) => setInput(e.target.value); //obtaining the value from the input field
 
-    //adding the values to the tasks array
-    const handleSetTasks = () => {
-        const newTask = {
-            text: input,
-            id: Date.now(),
-        };
-
-        if (input.length) {
-            setTasks([...tasks, newTask]);
-        }
-        setInput("");
+    const submitListner = (e) => {
+        e.preventDefault();
+        if (input.length) data.dispatch({ type: ACTIONS.ADD_TASK, payload: input }); //dispatches input value to Data-Context
+        setInput(""); //makes the input field empty
     };
-
-    //Displaying Toast
-    const handleSetToastStatus = () => {
-        setToastStatus(true);
-
-        setTimeout(() => {
-            setToastStatus(false);
-        }, 800);
-    };
-
-    //logging the array for reference
-    useEffect(() => {
-        if (tasks.length) {
-            console.log("changing");
-            console.log(tasks);
-        }
-    }, [tasks]);
-
-    //deleting completed tasks on clicking
-    const deleteCompletedTask = (clickedObj) => {
-        const updatedArray = tasks.filter((obj) => obj.id !== clickedObj.id);
-        setTasks(updatedArray);
-        handleSetToastStatus();
-    };
-
-    //listening for enter-key press and calling the handleSetTasks function
-    useEffect(() => {
-        const listener = (event) => {
-            if (event.code === "Enter" || event.code === "NumpadEnter") {
-                event.preventDefault();
-                handleSetTasks();
-            }
-        };
-        document.addEventListener("keydown", listener);
-        return () => {
-            document.removeEventListener("keydown", listener);
-        };
-    });
 
     //form
     return (
         <div>
-            <div>
-                <form>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Add new task"
-                            value={input}
-                            onChange={handleInput}
-                            required
-                        />
-                    </div>
-                </form>
-            </div>
-            <div>
-                {tasks.length === 0 && <NoTaskImage />}
-
-                {tasks.length > 0 && (
-                    <TaskList
-                        list={tasks}
-                        deleteCompletedTask={deleteCompletedTask}
+            <form onSubmit={submitListner}>
+                <div className={classes.inputContainer}>
+                    <input
+                        className={classes.inputBox}
+                        type="text"
+                        placeholder="Add new task"
+                        value={input} //saves entered data in the input state
+                        onChange={handleInput} //calls input handling function
+                        required
                     />
-                )}
-
-                {toastStatus===true && <Toast/>}
-            </div>
+                </div>
+            </form>
         </div>
     );
 }

@@ -1,9 +1,15 @@
 import desktopIcon from "../images/image1.png";
 
+import classes from "./DesktopIcon.module.css";
+
 function DesktopIcon() {
     return (
         <div>
-            <img src={desktopIcon} alt="Desktop Icon" />
+            <img
+                src={desktopIcon}
+                className={classes.desktopIcon}
+                alt="Desktop Icon"
+            />
         </div>
     );
 }

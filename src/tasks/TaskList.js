@@ -1,25 +1,28 @@
 import TaskItem from "./TaskItem";
+import DataContext from "../store/DataContext";
 
-function TaskList({ list, deleteCompletedTask }) {
+import classes from "./TaskList.module.css"
+
+import { useContext } from "react";
+
+function TaskList() {
+    const data = useContext(DataContext); //using context
+
     return (
-        <div>
+        <div className={classes.divContainer}>
             {/* Task count */}
-            <div>
-                <p>My Tasks &#40;{list.length}&#41;</p>
+            <div className={classes.taskCountContainer}>
+                {/* &#40; = '(' and &#41 =')' */}
+                <p className={classes.taskCount}>My Tasks &#40;{data.tasks.length}&#41;</p>
             </div>
 
             {/* Listing out Tasks */}
-            <div>
-                {list.length > 0 &&
-                    list.map((obj, index) => {
+            <div className={classes.listContainer}>
+                {data.tasks.length > 0 &&
+                    data.tasks.map((obj) => {
                         return (
-                            <TaskItem
-                                key={index}
-                                deleteCompletedTask={deleteCompletedTask}
-                                item={obj.text}
-                                id={obj.id}
-                                obj={obj}
-                            />
+                            //passing each object and its text to TaskItem
+                            <TaskItem key={obj.id} obj={obj} />
                         );
                     })}
             </div>
