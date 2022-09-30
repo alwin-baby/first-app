@@ -1,57 +1,62 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useReducer } from "react";
 
 //creates the context and initial values are set
-const DataContext = createContext({
+const initialState = {
     tasks: [],
-    handleSetTasks: (input) => {},
-    deleteCompletedTask: (clickedObj) => {},
     toastStatus: false,
-});
+};
+const DataContext = createContext(initialState);
 
-// creates context provider
-export function DataContextProvider(props) {
-    const [tasks, setTasks] = useState([]);
-    const [toastStatus, setToastStatus] = useState(false);
+export const ACTIONS = { //defining actions and exporting them
+    ADD_TASK: "add-task",
+    DELETE_TASK: "delete-task",
+    DISPLAY_TOAST: "display-toast",
+    UNDISPLAY_TOAST: "undisplay-toast"
+};
 
-    //adding the values to the tasks array
-    const handleSetTasks = (input) => {
-        const newTask = {
-            text: input,
-            id: Date.now(), //current date and time in milliseconds
-        };
-        setTasks([newTask, ...tasks]);
+const taskReducer = (tasks, action) => { //functions for adding and removing tasks
+    switch (action.type) {
+        case "add-task":
+            return addTask(tasks, action.payload);
+        case "delete-task":
+            return deleteTask(tasks, action.payload.id);
+        default:
+            return tasks;
+    }
+};
+
+const toastReducer = (toastStatus, action) => { //functions for displaying and undisplaying toast
+    switch (action.type) {
+        case "display-toast":
+            return (toastStatus = true);
+        case "undisplay-toast":
+            return (toastStatus = false);
+        default:
+            return (toastStatus = false);
+    }
+};
+
+const addTask = (tasksArray, input) => { //add task function
+    const newTask = {
+        text: input,
+        id: Date.now(),
     };
+    return [newTask, ...tasksArray];
+};
 
-    //logging the array for reference
-    useEffect(() => {
-        if (tasks.length) {
-            console.log("changing");
-            console.log(tasks);
-        }
-    }, [tasks]);
+const deleteTask = (tasksArray, id) => { //delete task function
+    return tasksArray.filter((obj) => obj.id !== id);
+};
 
-    //deleting completed tasks on clicking
-    const deleteCompletedTask = (clickedObj) => {
-        const updatedArray = tasks.filter((obj) => obj.id !== clickedObj.id);
-        setTasks(updatedArray);
-        handleSetToastStatus(); //calls the function which initiates the display of toast
-    };
+export const DataContextProvider = (props) => {
+    const [tasks, dispatch] = useReducer(taskReducer, []);
+    const [toastStatus, dispatchToastStatus] = useReducer(toastReducer, false);
 
-    //initiates the display of toast
-    const handleSetToastStatus = () => {
-        setToastStatus(true);
-
-        setTimeout(() => {
-            setToastStatus(false);
-        }, 5000); // toast undisplayed after 5 seconds
-    };
-
-    //context object to pass and update data in the context, dynamically
     const context = {
         tasks: tasks,
-        handleSetTasks: handleSetTasks,
-        deleteCompletedTask: deleteCompletedTask,
+        dispatch: dispatch,
         toastStatus: toastStatus,
+        dispatchToastStatus: dispatchToastStatus,
     };
 
     return (
@@ -59,6 +64,6 @@ export function DataContextProvider(props) {
             {props.children}
         </DataContext.Provider>
     );
-}
+};
 
 export default DataContext;

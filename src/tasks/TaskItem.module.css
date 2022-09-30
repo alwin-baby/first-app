@@ -6,6 +6,7 @@
 }
 
 .taskTextContainer :hover {
+    transition: 0.3s;
     background: rgba(217, 217, 217, 0.58);
     border-color: rgba(94, 91, 91, 0.3);
 }

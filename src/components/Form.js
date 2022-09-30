@@ -1,4 +1,5 @@
 import DataContext from "../store/DataContext";
+import { ACTIONS } from "../store/DataContext";
 
 import classes from "./Form.module.css";
 
@@ -12,7 +13,7 @@ function Form() {
 
     const submitListner = (e) => {
         e.preventDefault();
-        if (input.length) data.handleSetTasks(input);
+        if (input.length) data.dispatch({ type: ACTIONS.ADD_TASK, payload: input }); //dispatches input value to Data-Context
         setInput(""); //makes the input field empty
     };
 
